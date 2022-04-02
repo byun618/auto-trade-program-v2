@@ -33,6 +33,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@byun618/auto-trade-models", "npm:0.0.1"],\
+            ["@byun618/upbit-node", "npm:0.0.1"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
             ["@types/express", "npm:4.17.13"],\
@@ -42,7 +44,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["@typescript-eslint/eslint-plugin", "virtual:85af2ae69dca7d6261e93b48b6177d22522d6f337b5fc053f63ad709f7e688f5564e9df7fcc059e1bab4fe4a3e4035f6ec9f5def967f344ed842717ca44e4a13#npm:5.17.0"],\
             ["@typescript-eslint/parser", "virtual:85af2ae69dca7d6261e93b48b6177d22522d6f337b5fc053f63ad709f7e688f5564e9df7fcc059e1bab4fe4a3e4035f6ec9f5def967f344ed842717ca44e4a13#npm:5.17.0"],\
-            ["auto-trade-models", "npm:0.0.1"],\
             ["axios", "npm:0.26.1"],\
             ["cors", "npm:2.8.5"],\
             ["crypto", "npm:1.0.1"],\
@@ -63,7 +64,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jsonwebtoken", "npm:8.5.1"],\
             ["moment-timezone", "npm:0.5.34"],\
             ["mongoose", "npm:6.2.9"],\
-            ["node-upbit-trade", "npm:0.0.1"],\
             ["prettier", "npm:2.6.1"],\
             ["querystring", "npm:0.2.1"],\
             ["socket.io", "npm:4.4.1"],\
@@ -102,6 +102,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/helper-validator-identifier", "npm:7.16.7"],\
             ["chalk", "npm:2.4.2"],\
             ["js-tokens", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@byun618/auto-trade-models", [\
+        ["npm:0.0.1", {\
+          "packageLocation": "./.yarn/cache/@byun618-auto-trade-models-npm-0.0.1-df2fae39d9-b7c2f4f89e.zip/node_modules/@byun618/auto-trade-models/",\
+          "packageDependencies": [\
+            ["@byun618/auto-trade-models", "npm:0.0.1"],\
+            ["dotenv", "npm:16.0.0"],\
+            ["mongoose", "npm:6.2.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@byun618/upbit-node", [\
+        ["npm:0.0.1", {\
+          "packageLocation": "./.yarn/cache/@byun618-upbit-node-npm-0.0.1-9441e0de81-d6a3ab73ea.zip/node_modules/@byun618/upbit-node/",\
+          "packageDependencies": [\
+            ["@byun618/upbit-node", "npm:0.0.1"],\
+            ["axios", "npm:0.26.1"],\
+            ["dotenv", "npm:16.0.0"],\
+            ["jsonwebtoken", "npm:8.5.1"],\
+            ["moment-timezone", "npm:0.5.34"],\
+            ["querystring", "npm:0.2.1"],\
+            ["socket.io", "npm:4.4.1"],\
+            ["uuid", "npm:8.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1017,22 +1044,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["auto-trade-models", [\
-        ["npm:0.0.1", {\
-          "packageLocation": "./.yarn/cache/auto-trade-models-npm-0.0.1-9f596c65b5-9852446730.zip/node_modules/auto-trade-models/",\
-          "packageDependencies": [\
-            ["auto-trade-models", "npm:0.0.1"],\
-            ["dotenv", "npm:16.0.0"],\
-            ["mongoose", "npm:6.2.9"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["auto-trade-program-v2", [\
         ["workspace:.", {\
           "packageLocation": "./",\
           "packageDependencies": [\
             ["auto-trade-program-v2", "workspace:."],\
+            ["@byun618/auto-trade-models", "npm:0.0.1"],\
+            ["@byun618/upbit-node", "npm:0.0.1"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
             ["@types/express", "npm:4.17.13"],\
@@ -1042,7 +1060,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["@typescript-eslint/eslint-plugin", "virtual:85af2ae69dca7d6261e93b48b6177d22522d6f337b5fc053f63ad709f7e688f5564e9df7fcc059e1bab4fe4a3e4035f6ec9f5def967f344ed842717ca44e4a13#npm:5.17.0"],\
             ["@typescript-eslint/parser", "virtual:85af2ae69dca7d6261e93b48b6177d22522d6f337b5fc053f63ad709f7e688f5564e9df7fcc059e1bab4fe4a3e4035f6ec9f5def967f344ed842717ca44e4a13#npm:5.17.0"],\
-            ["auto-trade-models", "npm:0.0.1"],\
             ["axios", "npm:0.26.1"],\
             ["cors", "npm:2.8.5"],\
             ["crypto", "npm:1.0.1"],\
@@ -1063,7 +1080,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jsonwebtoken", "npm:8.5.1"],\
             ["moment-timezone", "npm:0.5.34"],\
             ["mongoose", "npm:6.2.9"],\
-            ["node-upbit-trade", "npm:0.0.1"],\
             ["prettier", "npm:2.6.1"],\
             ["querystring", "npm:0.2.1"],\
             ["socket.io", "npm:4.4.1"],\
@@ -3684,22 +3700,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["semver", "npm:7.3.5"],\
             ["tar", "npm:6.1.11"],\
             ["which", "npm:2.0.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["node-upbit-trade", [\
-        ["npm:0.0.1", {\
-          "packageLocation": "./.yarn/cache/node-upbit-trade-npm-0.0.1-cef6f15221-22e71c2a97.zip/node_modules/node-upbit-trade/",\
-          "packageDependencies": [\
-            ["node-upbit-trade", "npm:0.0.1"],\
-            ["axios", "npm:0.26.1"],\
-            ["dotenv", "npm:16.0.0"],\
-            ["jsonwebtoken", "npm:8.5.1"],\
-            ["moment-timezone", "npm:0.5.34"],\
-            ["querystring", "npm:0.2.1"],\
-            ["socket.io", "npm:4.4.1"],\
-            ["uuid", "npm:8.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\
