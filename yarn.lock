@@ -747,6 +747,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"auto-trade-models@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "auto-trade-models@npm:0.0.1"
+  dependencies:
+    dotenv: ^16.0.0
+    mongoose: ^6.2.2
+  checksum: 9852446730eb285fe77739da70366db1ad64cbd4619ef4eb8acc0914b58b2444b8abec804c9c75cf4afa8e24625a40031542b0754658f9d0ecc1c4fafd83fc54
+  languageName: node
+  linkType: hard
+
 "auto-trade-program-v2@workspace:.":
   version: 0.0.0-use.local
   resolution: "auto-trade-program-v2@workspace:."
@@ -760,6 +770,7 @@ __metadata:
     "@types/node": ^17.0.21
     "@typescript-eslint/eslint-plugin": ^5.14.0
     "@typescript-eslint/parser": ^5.14.0
+    auto-trade-models: ^0.0.1
     axios: ^0.26.1
     cors: ^2.8.5
     crypto: ^1.0.1
@@ -780,6 +791,7 @@ __metadata:
     jsonwebtoken: ^8.5.1
     moment-timezone: ^0.5.34
     mongoose: ^6.2.7
+    node-upbit-trade: ^0.0.1
     prettier: ^2.5.1
     querystring: ^0.2.1
     socket.io: ^4.4.1
@@ -2886,7 +2898,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.2.7":
+"mongoose@npm:^6.2.2, mongoose@npm:^6.2.7":
   version: 6.2.9
   resolution: "mongoose@npm:6.2.9"
   dependencies:
@@ -2969,6 +2981,21 @@ __metadata:
   bin:
     node-gyp: bin/node-gyp.js
   checksum: 4d8ef8860f7e4f4d86c91db3f519d26ed5cc23b48fe54543e2afd86162b4acbd14f21de42a5db344525efb69a991e021b96a68c70c6e2d5f4a5cb770793da6d3
+  languageName: node
+  linkType: hard
+
+"node-upbit-trade@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "node-upbit-trade@npm:0.0.1"
+  dependencies:
+    axios: ^0.26.1
+    dotenv: ^16.0.0
+    jsonwebtoken: ^8.5.1
+    moment-timezone: ^0.5.34
+    querystring: ^0.2.1
+    socket.io: ^4.4.1
+    uuid: ^8.3.2
+  checksum: 22e71c2a9719b64eec2f54bc83bff2945e26c30ecc8e4a626a3161659e32d250989a3cdaee62539381fee3dddd6db9fc539f5cb6bd3c2ba38aa7523d3c1cf159
   languageName: node
   linkType: hard
 
