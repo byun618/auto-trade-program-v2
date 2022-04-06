@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auto-trade-program-byun618-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auto-trade-program-byun618-1
+  template:
+    metadata:
+      labels:
+        app: auto-trade-program-byun618-1
+    spec:
+      containers:
+        - name: auto-trade-program-byun618-1
+          image: byun618/auto-trade-program:0.0.1-pre4
+          args: ['yarn', 'start']
+          resources:
+            requests:
+              cpu: '300m'
+              memory: '500Mi'
+            limits:
+              cpu: '300m'
+              memory: '500Mi'
+          envFrom:
+            - secretRef:
+                name: auto-trade-program-byun618-1
+            - secretRef:
+                name: auto-trade-mongodb
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: regcred

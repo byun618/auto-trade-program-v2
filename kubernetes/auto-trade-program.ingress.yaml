@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auto-trade-program
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  tls:
+    - hosts:
+      - s6nprogram.duckdns.org
+      secretName: auto-trade-program-tls
+  rules:
+  - host: s6nprogram.duckdns.org
+    http:
+      paths:
+      - path: /623f06659ff1ee6d9a948cf7
+        pathType: Prefix
+        backend:
+          service:
+            name: auto-trade-program-byun618-1
+            port:
+              number: 3001
+
