@@ -32,13 +32,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@byun618/auto-trade-models@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@byun618/auto-trade-models@npm:0.0.1"
+"@byun618/auto-trade-models@npm:0.0.2":
+  version: 0.0.2
+  resolution: "@byun618/auto-trade-models@npm:0.0.2"
   dependencies:
     dotenv: ^16.0.0
     mongoose: ^6.2.2
-  checksum: b7c2f4f89e46002379ab32ec8af2e01ad54496376e605d18afcb89effa11849273096d665c089b975162c384d7698e09e3fcf7098b733d2322a8168412dc01b0
+  checksum: 02877afbda68e3d32644e2244a19fb83c13280fd5d50518ee3224503e7d0d2d88e8d1ad0bed37558e1d7a8542fa65115c6c46de6434589033dfb60978e74b140
   languageName: node
   linkType: hard
 
@@ -776,7 +776,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "auto-trade-program-v2@workspace:."
   dependencies:
-    "@byun618/auto-trade-models": ^0.0.1
+    "@byun618/auto-trade-models": 0.0.2
     "@byun618/upbit-node": ^0.0.1
     "@types/cors": ^2.8.12
     "@types/crypto-js": ^4.1.1
