@@ -32,15 +32,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@byun618/auto-trade-models@npm:0.0.2":
-  version: 0.0.2
-  resolution: "@byun618/auto-trade-models@npm:0.0.2"
+"@byun618/auto-trade-models@portal:/Users/sanghyunbyun/Desktop/auto-trade-models::locator=auto-trade-program-v2%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@byun618/auto-trade-models@portal:/Users/sanghyunbyun/Desktop/auto-trade-models::locator=auto-trade-program-v2%40workspace%3A."
   dependencies:
     dotenv: ^16.0.0
     mongoose: ^6.2.2
-  checksum: 02877afbda68e3d32644e2244a19fb83c13280fd5d50518ee3224503e7d0d2d88e8d1ad0bed37558e1d7a8542fa65115c6c46de6434589033dfb60978e74b140
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@byun618/upbit-node@npm:^0.0.1":
   version: 0.0.1
