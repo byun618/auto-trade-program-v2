@@ -21,7 +21,7 @@ export default async (socket: Socket, next) => {
     const userProgram = await UserProgram.findOne({
       user: user._id,
       no: process.env.APP_PATH.split('-')[1],
-    })
+    }).populate('user')
 
     socket.user = user
     socket.userProgram = userProgram

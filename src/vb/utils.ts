@@ -1,7 +1,8 @@
+import { UserProgramLog } from '@byun618/auto-trade-models'
 import { Socket } from 'socket.io'
 import Vb from './vb'
 
-export const initVb = (socket: Socket, userProgramId: string) => {
+export const initVb = async (socket: Socket, userProgramId: string) => {
   const vb = new Vb({
     socket,
     access: process.env.UPBIT_ACCESS,
@@ -9,8 +10,13 @@ export const initVb = (socket: Socket, userProgramId: string) => {
     userProgramId,
   })
 
-  socket.emit('connected', {
-    message: '성공적으로 초기화 되어 연결되었습니다.',
+  const message = '성공적으로 초기화 되어 연결되었습니다.'
+  await UserProgramLog.create({
+    userProgram: userProgramId,
+    message,
+  })
+  socket.emit('message', {
+    message,
   })
 
   return vb

@@ -1,4 +1,8 @@
-import { UserProgram, UserProgramInterface } from '@byun618/auto-trade-models'
+import {
+  UserProgram,
+  UserProgramInterface,
+  UserProgramLog,
+} from '@byun618/auto-trade-models'
 import { Quotation, Upbit } from '@byun618/upbit-node'
 import moment, { Moment } from 'moment-timezone'
 import { Socket } from 'socket.io'
@@ -27,10 +31,18 @@ export default class Vb {
     this.targetPrice = null
   }
 
-  updateSocket(socket: Socket) {
+  private async emitMessage(message: string) {
+    await UserProgramLog.create({
+      userProgram: this.userProgramId,
+      message,
+    })
+    this.socket.emit('message', { message })
+  }
+
+  async updateSocket(socket: Socket) {
     this.socket = socket
 
-    this.socket.emit('connected', { message: '성공적으로 재연결되었습니다.' })
+    await this.emitMessage('성공적으로 재연결되었습니다.')
   }
 
   private async updateTargetTime(userProgram: UserProgramInterface) {
@@ -57,9 +69,7 @@ export default class Vb {
     userProgram.sellTime = sellTime.format()
     await userProgram.save()
 
-    this.socket.emit('updated-target-time', {
-      message: '성공적으로 매수/매도 시간이 업데이트 되었습니다.',
-    })
+    await this.emitMessage('성공적으로 매수/매도 시간이 업데이트 되었습니다.')
   }
 
   private async updateTargetPrice(userProgram: UserProgramInterface) {
@@ -97,19 +107,22 @@ export default class Vb {
     userProgram.targetPrice = targetPrice
     await userProgram.save()
 
-    this.socket.emit('updated-target-price', {
-      message: '성공적으로 목표 매수가가 업데이트 되었습니다.',
-    })
+    await this.emitMessage('성공적으로 목표 매수가가 업데이트 되었습니다.')
   }
 
-  async getCurrentPrice(userProgram: UserProgramInterface) {
-    return await this.quotation.getCurrentPrice(userProgram.ticker.market)
+  async getCurrentPrice(userProgram: UserProgramInterface, emit?: boolean) {
+    const { market: ticker } = userProgram.ticker
+    const currentPrice = await this.quotation.getCurrentPrice(ticker)
+
+    if (emit) {
+      await this.emitMessage(`${currentPrice.toLocaleString()}원`)
+    }
+
+    return currentPrice
   }
 
   async buy(userProgram: UserProgramInterface) {
-    this.socket.emit('buy', {
-      message: '목표 매수가에 도달하였습니다. 매수를 진행합니다.',
-    })
+    await this.emitMessage('목표 매수가에 도달하였습니다. 매수를 진행합니다.')
 
     // TODO: 분산 투자
     try {
@@ -133,9 +146,8 @@ export default class Vb {
             break
           }
         }
-        this.socket.emit('buy', {
-          message: '매수 주문 처리중...',
-        })
+
+        await this.emitMessage('매수 주문 처리중...')
 
         await sleep(500)
       }
@@ -147,18 +159,14 @@ export default class Vb {
       userProgram.isSell = false
       await userProgram.save()
 
-      this.socket.emit('buy', {
-        message: '매수를 완료 했습니다.',
-      })
+      await this.emitMessage('매수를 완료 했습니다.')
     } catch (err) {
       handleError(this.socket, err)
     }
   }
 
   async sell(userProgram: UserProgramInterface) {
-    this.socket.emit('sell', {
-      message: '목표 매도시간에 도달하였습니다. 매도를 진행합니다.',
-    })
+    await this.emitMessage('목표 매도시간에 도달하였습니다. 매도를 진행합니다.')
 
     try {
       const { market: ticker } = userProgram.ticker
@@ -184,9 +192,7 @@ export default class Vb {
           }
         }
 
-        this.socket.emit('sell', {
-          message: '매도 주문 처리 대기중...',
-        })
+        await this.emitMessage('매도 주문 처리 대기중...')
         await sleep(500)
       }
 
@@ -197,9 +203,7 @@ export default class Vb {
       userProgram.isSell = true
       await userProgram.save()
 
-      this.socket.emit('sell', {
-        message: '매도를 완료합니다.',
-      })
+      await this.emitMessage('매도를 완료합니다.')
     } catch (err) {
       handleError(this.socket, err)
     }
@@ -213,14 +217,14 @@ export default class Vb {
     userProgram.started = true
     await userProgram.save()
 
-    this.socket.emit('started', { message: '프로그램이 시작되었습니다.' })
+    await this.emitMessage('프로그램이 시작되었습니다.')
 
     await this.updateTargetTime(userProgram)
 
     while (this.started) {
       const now = moment()
 
-      if (!this.isHold && now.isBetween(this.buyTime, this.sellTime)) {
+      if (now.isBetween(this.buyTime, this.sellTime) && !this.isHold) {
         if (!this.targetPrice) {
           await this.updateTargetPrice(userProgram)
         }
@@ -232,15 +236,30 @@ export default class Vb {
         }
       }
 
-      if (this.isHold && !this.isSell && now.isAfter(this.sellTime)) {
+      if (now.isAfter(this.sellTime) && !this.isHold && !this.isSell) {
+        this.emitMessage('목표가에 도달하지 않았습니다.')
+        await this.stop(false)
+        break
+      }
+
+      if (now.isAfter(this.sellTime) && this.isHold && !this.isSell) {
         await this.sell(userProgram)
+      }
+
+      if (
+        now.isAfter(this.sellTime.clone().add(10, 'minute')) &&
+        !this.isHold &&
+        this.isSell
+      ) {
+        await this.stop(false)
+        break
       }
 
       await sleep(1000)
     }
   }
 
-  async stop() {
+  async stop(manual: boolean = true) {
     this.started = false
     this.buyTime = null
     this.sellTime = null
@@ -264,6 +283,10 @@ export default class Vb {
       },
     )
 
-    this.socket.emit('stoped', { message: '프로그램이 정지되었습니다.' })
+    const message = manual
+      ? '프로그램이 정지되었습니다.'
+      : '프로그램이 종료되었습니다.'
+
+    await this.emitMessage(message)
   }
 }
