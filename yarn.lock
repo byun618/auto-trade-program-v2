@@ -42,9 +42,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@byun618/upbit-node@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@byun618/upbit-node@npm:0.0.1"
+"@byun618/upbit-node@npm:0.0.2":
+  version: 0.0.2
+  resolution: "@byun618/upbit-node@npm:0.0.2"
   dependencies:
     axios: ^0.26.1
     dotenv: ^16.0.0
@@ -53,7 +53,7 @@ __metadata:
     querystring: ^0.2.1
     socket.io: ^4.4.1
     uuid: ^8.3.2
-  checksum: d6a3ab73ea50bd3306d5f9bc3d08d78d38a5fa3c2395d9a6fb626635d4e4e1ed218d722b2e2c39ecef2d27dd024d9ac7589a015ad479cfa3f84a64d89842ac57
+  checksum: f4893fa4e999739ed69fa4930e4dd8a428ae74fdffedbbbe0a7244e7e986faeed50d01ef86ae5b8ab8ae19d5917898f2d29726124e264d4a478fd12b1d4c2e7c
   languageName: node
   linkType: hard
 
@@ -777,7 +777,7 @@ __metadata:
   resolution: "auto-trade-program-v2@workspace:."
   dependencies:
     "@byun618/auto-trade-models": 0.0.4
-    "@byun618/upbit-node": ^0.0.1
+    "@byun618/upbit-node": 0.0.2
     "@types/cors": ^2.8.12
     "@types/crypto-js": ^4.1.1
     "@types/express": ^4.17.13

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@byun618/auto-trade-models": "0.0.4",
-    "@byun618/upbit-node": "^0.0.1",
+    "@byun618/upbit-node": "0.0.2",
     "axios": "^0.26.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",

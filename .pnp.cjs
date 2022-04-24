@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@byun618/auto-trade-models", "npm:0.0.4"],\
-            ["@byun618/upbit-node", "npm:0.0.1"],\
+            ["@byun618/upbit-node", "npm:0.0.2"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
             ["@types/express", "npm:4.17.13"],\
@@ -118,10 +118,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@byun618/upbit-node", [\
-        ["npm:0.0.1", {\
-          "packageLocation": "./.yarn/cache/@byun618-upbit-node-npm-0.0.1-9441e0de81-d6a3ab73ea.zip/node_modules/@byun618/upbit-node/",\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/@byun618-upbit-node-npm-0.0.2-264e266e5d-f4893fa4e9.zip/node_modules/@byun618/upbit-node/",\
           "packageDependencies": [\
-            ["@byun618/upbit-node", "npm:0.0.1"],\
+            ["@byun618/upbit-node", "npm:0.0.2"],\
             ["axios", "npm:0.26.1"],\
             ["dotenv", "npm:16.0.0"],\
             ["jsonwebtoken", "npm:8.5.1"],\
@@ -1050,7 +1050,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["auto-trade-program-v2", "workspace:."],\
             ["@byun618/auto-trade-models", "npm:0.0.4"],\
-            ["@byun618/upbit-node", "npm:0.0.1"],\
+            ["@byun618/upbit-node", "npm:0.0.2"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
             ["@types/express", "npm:4.17.13"],\
