@@ -1,6 +1,6 @@
 {
   "name": "auto-trade-program-v2",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "https://github.com/byun618/auto-trade-program-v2.git",
   "author": "byun618 <byun618@gmail.com>",
