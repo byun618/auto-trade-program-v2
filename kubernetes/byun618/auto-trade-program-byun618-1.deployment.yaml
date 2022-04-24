@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auto-trade-program-byun618-1
-          image: byun618/auto-trade-program:0.0.1-pre4
+          image: byun618/auto-trade-program:0.0.2
           args: ['yarn', 'start']
           resources:
             requests:
@@ -24,6 +24,8 @@ spec:
               cpu: '300m'
               memory: '500Mi'
           envFrom:
+            - secretRef:
+                name: auto-trade-program
             - secretRef:
                 name: auto-trade-program-byun618-1
             - secretRef:
