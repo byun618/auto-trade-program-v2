@@ -2,12 +2,13 @@ import {
   UserProgram,
   UserProgramInterface,
   UserProgramLog,
+  UserProgramTrade,
 } from '@byun618/auto-trade-models'
 import { Quotation, Upbit } from '@byun618/upbit-node'
 import moment, { Moment } from 'moment-timezone'
 import { Socket } from 'socket.io'
 import { VbPayload } from './interfaces'
-import { handleError, sleep } from './utils'
+import { handleError, sleep, sum } from './utils'
 
 export default class Vb {
   private socket: Socket
@@ -143,6 +144,15 @@ export default class Vb {
           const balance = await this.upbit.getBalance(ticker)
 
           if (balance) {
+            await UserProgramTrade.create({
+              type: 'buy',
+              userProgram: userProgram._id,
+              price: sum(order.trades, 'price'),
+              volume: sum(order.trades, 'volume'),
+              funds: sum(order.trades, 'funds'),
+              fee: Number(order.paid_fee),
+            })
+
             break
           }
         }
@@ -187,6 +197,15 @@ export default class Vb {
             await this.upbit.getBalance(ticker)
           } catch (err) {
             if (err.message === '보유한 코인이 아닙니다.') {
+              await UserProgramTrade.create({
+                type: 'sell',
+                userProgram: userProgram._id,
+                price: sum(order.trades, 'price'),
+                volume: sum(order.trades, 'volume'),
+                funds: sum(order.trades, 'funds'),
+                fee: Number(order.paid_fee),
+              })
+
               break
             }
           }

@@ -34,3 +34,7 @@ export const handleError = (socket: Socket, err: Error) => {
     stack: err.stack,
   })
 }
+
+export const sum = (array: any[], key) => {
+  return array.reduce((acc, cur) => acc + Number(cur[key]), 0)
+}

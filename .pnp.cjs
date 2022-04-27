@@ -33,7 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@byun618/auto-trade-models", "npm:0.0.4"],\
+            ["@byun618/auto-trade-models", "npm:0.0.5"],\
             ["@byun618/upbit-node", "npm:0.0.2"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
@@ -107,10 +107,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@byun618/auto-trade-models", [\
-        ["npm:0.0.4", {\
-          "packageLocation": "./.yarn/cache/@byun618-auto-trade-models-npm-0.0.4-6c55b406d5-286770afd2.zip/node_modules/@byun618/auto-trade-models/",\
+        ["npm:0.0.5", {\
+          "packageLocation": "./.yarn/cache/@byun618-auto-trade-models-npm-0.0.5-bea2b05a50-250f3b7c67.zip/node_modules/@byun618/auto-trade-models/",\
           "packageDependencies": [\
-            ["@byun618/auto-trade-models", "npm:0.0.4"],\
+            ["@byun618/auto-trade-models", "npm:0.0.5"],\
             ["dotenv", "npm:16.0.0"],\
             ["mongoose", "npm:6.2.9"]\
           ],\
@@ -1049,7 +1049,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["auto-trade-program-v2", "workspace:."],\
-            ["@byun618/auto-trade-models", "npm:0.0.4"],\
+            ["@byun618/auto-trade-models", "npm:0.0.5"],\
             ["@byun618/upbit-node", "npm:0.0.2"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
