@@ -21,4 +21,10 @@ spec:
             name: auto-trade-program-byun618-1
             port:
               number: 3001
-
+      - path: /byun618-2
+        pathType: Prefix
+        backend:
+          service:
+            name: auto-trade-program-byun618-2
+            port:
+              number: 3001
