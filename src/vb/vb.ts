@@ -7,6 +7,7 @@ import {
 import { Quotation, Upbit } from '@byun618/upbit-node'
 import moment, { Moment } from 'moment-timezone'
 import { Socket } from 'socket.io'
+import { CurrentPriceError } from './error.helper'
 import { VbPayload } from './interfaces'
 import { handleError, sleep, sum } from './utils'
 
@@ -112,14 +113,18 @@ export default class Vb {
   }
 
   async getCurrentPrice(userProgram: UserProgramInterface, emit?: boolean) {
-    const { market: ticker } = userProgram.ticker
-    const currentPrice = await this.quotation.getCurrentPrice(ticker)
+    try {
+      const { market: ticker } = userProgram.ticker
+      const currentPrice = await this.quotation.getCurrentPrice(ticker)
 
-    if (emit) {
-      await this.emitMessage(`${currentPrice.toLocaleString()}원`)
+      if (emit) {
+        await this.emitMessage(`${currentPrice.toLocaleString()}원`)
+      }
+
+      return currentPrice
+    } catch (err) {
+      throw new CurrentPriceError(err.message)
     }
-
-    return currentPrice
   }
 
   async buy(userProgram: UserProgramInterface) {
@@ -241,40 +246,51 @@ export default class Vb {
     await this.updateTargetTime(userProgram)
 
     while (this.started) {
-      const now = moment()
+      try {
+        const now = moment()
 
-      if (now.isBetween(this.buyTime, this.sellTime) && !this.isHold) {
-        if (!this.targetPrice) {
-          await this.updateTargetPrice(userProgram)
+        if (now.isBetween(this.buyTime, this.sellTime) && !this.isHold) {
+          if (!this.targetPrice) {
+            await this.updateTargetPrice(userProgram)
+          }
+
+          const currentPrice = await this.getCurrentPrice(userProgram)
+
+          if (currentPrice >= this.targetPrice) {
+            await this.buy(userProgram)
+          }
         }
 
-        const currentPrice = await this.getCurrentPrice(userProgram)
+        if (now.isAfter(this.sellTime) && !this.isHold && !this.isSell) {
+          this.emitMessage('목표가에 도달하지 않았습니다.')
+          await this.stop(false)
+          break
+        }
 
-        if (currentPrice >= this.targetPrice) {
-          await this.buy(userProgram)
+        if (now.isAfter(this.sellTime) && this.isHold && !this.isSell) {
+          await this.sell(userProgram)
+        }
+
+        if (
+          now.isAfter(this.sellTime.clone().add(10, 'minute')) &&
+          !this.isHold &&
+          this.isSell
+        ) {
+          await this.stop(false)
+          break
+        }
+
+        await sleep(1000)
+      } catch (err) {
+        handleError(this.socket, err)
+
+        if (err.name === 'CurrentPriceError') {
+          await sleep(1000)
+          continue
+        } else {
+          throw err
         }
       }
-
-      if (now.isAfter(this.sellTime) && !this.isHold && !this.isSell) {
-        this.emitMessage('목표가에 도달하지 않았습니다.')
-        await this.stop(false)
-        break
-      }
-
-      if (now.isAfter(this.sellTime) && this.isHold && !this.isSell) {
-        await this.sell(userProgram)
-      }
-
-      if (
-        now.isAfter(this.sellTime.clone().add(10, 'minute')) &&
-        !this.isHold &&
-        this.isSell
-      ) {
-        await this.stop(false)
-        break
-      }
-
-      await sleep(1000)
     }
   }
 

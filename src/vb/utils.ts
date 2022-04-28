@@ -28,6 +28,7 @@ export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 export const handleError = (socket: Socket, err: Error) => {
   console.error(err)
+
   socket.emit('error', {
     name: err.name,
     message: err.message,
