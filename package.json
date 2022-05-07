@@ -14,6 +14,7 @@
     "@byun618/auto-trade-models": "0.0.5",
     "@byun618/upbit-node": "0.0.2",
     "axios": "^0.26.1",
+    "binance": "^2.0.29",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
@@ -25,7 +26,6 @@
     "jsonwebtoken": "^8.5.1",
     "moment-timezone": "^0.5.34",
     "mongoose": "^6.2.7",
-    "node-binance-api": "^0.13.1",
     "querystring": "^0.2.1",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
