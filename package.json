@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "node -r dotenv/config dist/index.js",
-    "dev": "ts-node-dev -r dotenv/config ./src/index.ts"
+    "dev": "ts-node-dev -r dotenv/config ./src/binance/index.ts"
   },
   "dependencies": {
     "@byun618/auto-trade-models": "0.0.5",
@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment-timezone": "^0.5.34",
     "mongoose": "^6.2.7",
+    "node-binance-api": "^0.13.1",
     "querystring": "^0.2.1",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
