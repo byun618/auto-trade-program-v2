@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "node -r dotenv/config dist/index.js",
-    "dev": "ts-node-dev -r dotenv/config ./src/binance/index.ts"
+    "dev": "ts-node-dev -r dotenv/config ./src/index.ts"
   },
   "dependencies": {
     "@byun618/auto-trade-models": "0.0.5",
@@ -53,5 +53,8 @@
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.2"
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.0",
+  "resolutions": {
+    "@byun618/auto-trade-models": "portal:/Users/sanghyunbyun/Desktop/auto-trade-models"
+  }
 }

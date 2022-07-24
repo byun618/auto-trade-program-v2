@@ -1,63 +1,67 @@
 import http from 'http'
 import { Server, Socket } from 'socket.io'
 import { initApp } from './express-app'
+import Grid from './grid/grid'
 import auth from './public/auth'
-import { handleError, initVb } from './vb/utils'
+import { handleError, initVb } from './public/utils'
 import Vb from './vb/vb'
 
 const PORT = process.env.APP_PORT || 3001
 
-let program: Vb
+let program: Grid
 
 const serve = async () => {
   const app = initApp()
   const server = http.createServer(app)
   const io = new Server(server, {
     cors: { origin: '*', methods: ['GET', 'POST'] },
-    path: `/${process.env.APP_PATH}`,
+    path: `/${process.env.USER_SYMBOL_ID}`,
   })
 
   io.use(auth)
     .on('connection', async (socket: Socket) => {
-      const { user, userProgram } = socket
-
-      // TODO: socket 메세지를 class에서 보낼지 여기서 보낼지
+      const { userSymbol } = socket
 
       if (!program) {
-        program = await initVb(socket, userProgram.id)
+        program = new Grid({
+          api_key: process.env.BINANCE_API_KEY,
+          api_secret: process.env.BINANCE_SECRET_KEY,
+          userSymbolId: userSymbol.id,
+          socket,
+        })
       } else {
-        await program.updateSocket(socket)
+        program.updateSocket(socket)
       }
 
       socket.on('start', async () => {
         try {
           console.log(
-            `${userProgram.user.name}-${userProgram.no}-${userProgram.ticker.market}: 시작`,
+            `${userSymbol.user.name}-${userSymbol.id}-${userSymbol.symbol.name}: 시작`,
           )
-          await program.start()
-        } catch (err) {
-          handleError(socket, err)
+          program.start()
+        } catch {
+          console.error()
         }
       })
 
       socket.on('stop', async () => {
         try {
           console.log(
-            `${userProgram.user.name}-${userProgram.no}-${userProgram.ticker.market}: 정지`,
+            `${userSymbol.user.name}-${userSymbol.id}-${userSymbol.symbol.name}: 종료`,
           )
-          await program.stop()
-        } catch (err) {
-          handleError(socket, err)
+          program.stop()
+        } catch {
+          console.error()
         }
       })
 
-      socket.on('current-price', async () => {
-        try {
-          await program.getCurrentPrice(userProgram, true)
-        } catch (err) {
-          handleError(socket, err)
-        }
-      })
+      // socket.on('current-price', async () => {
+      //   try {
+      //     await program.getCurrentPrice(userProgram, true)
+      //   } catch (err) {
+      //     handleError(socket, err)
+      //   }
+      // })
 
       socket.on('disconnect', () => {
         console.log('disconnect')

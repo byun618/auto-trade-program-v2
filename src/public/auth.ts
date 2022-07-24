@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { Socket } from 'socket.io'
-import { User, UserProgram } from '@byun618/auto-trade-models'
+import { User, UserProgram, UserSymbol } from '@byun618/auto-trade-models'
 
 export default async (socket: Socket, next) => {
   try {
@@ -13,18 +13,25 @@ export default async (socket: Socket, next) => {
     const { userId } = jwt.verify(token, process.env.AUTH_SALT as string) as {
       userId: string
     }
-
     const user = await User.findOne({
       id: userId,
     })
 
-    const userProgram = await UserProgram.findOne({
-      user: user._id,
-      no: process.env.APP_PATH.split('-')[1],
-    }).populate('user')
+    if (!user) {
+      throw new Error('not user')
+    }
 
-    socket.user = user
-    socket.userProgram = userProgram
+    const userSymbol = await UserSymbol.findOne({
+      id: process.env.USER_SYMBOL_ID,
+    })
+      .populate('symbol')
+      .populate('user')
+
+    if (!userSymbol) {
+      throw new Error('no user symbol')
+    }
+
+    socket.userSymbol = userSymbol
 
     next()
   } catch (err) {

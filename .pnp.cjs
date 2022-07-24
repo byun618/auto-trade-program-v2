@@ -33,7 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@byun618/auto-trade-models", "npm:0.0.5"],\
+            ["@byun618/auto-trade-models", "portal:/Users/sanghyunbyun/Desktop/auto-trade-models::locator=auto-trade-program-v2%40workspace%3A."],\
             ["@byun618/upbit-node", "npm:0.0.2"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\
@@ -108,14 +108,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@byun618/auto-trade-models", [\
-        ["npm:0.0.5", {\
-          "packageLocation": "./.yarn/cache/@byun618-auto-trade-models-npm-0.0.5-bea2b05a50-250f3b7c67.zip/node_modules/@byun618/auto-trade-models/",\
+        ["portal:/Users/sanghyunbyun/Desktop/auto-trade-models::locator=auto-trade-program-v2%40workspace%3A.", {\
+          "packageLocation": "../auto-trade-models/",\
           "packageDependencies": [\
-            ["@byun618/auto-trade-models", "npm:0.0.5"],\
+            ["@byun618/auto-trade-models", "portal:/Users/sanghyunbyun/Desktop/auto-trade-models::locator=auto-trade-program-v2%40workspace%3A."],\
             ["dotenv", "npm:16.0.0"],\
             ["mongoose", "npm:6.2.9"]\
           ],\
-          "linkType": "HARD"\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["@byun618/upbit-node", [\
@@ -1050,7 +1050,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["auto-trade-program-v2", "workspace:."],\
-            ["@byun618/auto-trade-models", "npm:0.0.5"],\
+            ["@byun618/auto-trade-models", "portal:/Users/sanghyunbyun/Desktop/auto-trade-models::locator=auto-trade-program-v2%40workspace%3A."],\
             ["@byun618/upbit-node", "npm:0.0.2"],\
             ["@types/cors", "npm:2.8.12"],\
             ["@types/crypto-js", "npm:4.1.1"],\

@@ -9,7 +9,7 @@ import moment, { Moment } from 'moment-timezone'
 import { Socket } from 'socket.io'
 import { CurrentPriceError } from './error.helper'
 import { VbPayload } from './interfaces'
-import { handleError, sleep, sum } from './utils'
+import { handleError, sleep, sum } from '../public/utils'
 
 export default class Vb {
   private socket: Socket

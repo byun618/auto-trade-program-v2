@@ -1,6 +1,6 @@
 import { UserProgramLog } from '@byun618/auto-trade-models'
 import { Socket } from 'socket.io'
-import Vb from './vb'
+import Vb from '../vb/vb'
 
 export const initVb = async (socket: Socket, userProgramId: string) => {
   const vb = new Vb({
@@ -38,4 +38,9 @@ export const handleError = (socket: Socket, err: Error) => {
 
 export const sum = (array: any[], key) => {
   return array.reduce((acc, cur) => acc + Number(cur[key]), 0)
+}
+
+export const round = (num: number) => {
+  const n = Number((Math.abs(num) * 100).toPrecision(15))
+  return (Math.round(n) / 100) * Math.sign(num)
 }
